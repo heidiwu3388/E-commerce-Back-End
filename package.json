@@ -1,5 +1,5 @@
 {
-  "name": "module-13-challenge-orm",
+  "name": "e-commerce-back-end",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -11,11 +11,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@work.github.com:coding-boot-camp/module-13-challenge-orm.git"
+    "url": "https://github.com/heidiwu3388/E-commerce-Back-End.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Heidi Wu",
+  "license": "MIT",
   "devDependencies": {
     "nodemon": "^2.0.3"
   },
