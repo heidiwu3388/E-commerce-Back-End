@@ -71,7 +71,7 @@ router.post('/', (req, res) => {
     });
 });
 
-// update product
+// UPDATE Product
 router.put('/:id', (req, res) => {
   // update product data
   Product.update(req.body, {
@@ -80,15 +80,15 @@ router.put('/:id', (req, res) => {
     },
   })
     .then((product) => {
-      // find all associated tags from ProductTag
+      // find product's associated tags from ProductTag table
       return ProductTag.findAll({ where: { product_id: req.params.id } });
     })
-    .then((productTags) => {
+    .then((oldProductTags) => {
       // get list of current tag_ids
-      const productTagIds = productTags.map(({ tag_id }) => tag_id);
+      const oldTagIds = oldProductTags.map(({ tag_id }) => tag_id);
       // create filtered list of new tag_ids
       const newProductTags = req.body.tagIds
-        .filter((tag_id) => !productTagIds.includes(tag_id))
+        .filter((tag_id) => !oldTagIds.includes(tag_id))
         .map((tag_id) => {
           return {
             product_id: req.params.id,
@@ -96,7 +96,7 @@ router.put('/:id', (req, res) => {
           };
         });
       // figure out which ones to remove
-      const productTagsToRemove = productTags
+      const productTagsToRemove = oldProductTags
         .filter(({ tag_id }) => !req.body.tagIds.includes(tag_id))
         .map(({ id }) => id);
 
@@ -108,7 +108,6 @@ router.put('/:id', (req, res) => {
     })
     .then((updatedProductTags) => res.json(updatedProductTags))
     .catch((err) => {
-      // console.log(err);
       res.status(400).json(err);
     });
 });
