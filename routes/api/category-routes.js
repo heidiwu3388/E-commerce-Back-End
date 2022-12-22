@@ -1,7 +1,9 @@
+// import express router
 const router = require('express').Router();
+// import models
 const { Category, Product } = require('../../models');
 
-// The `/api/categories` endpoint
+// ****** The "/api/categories" endpoint ******
 
 // GET All Categories
 router.get('/', async (req, res) => {
@@ -16,7 +18,6 @@ router.get('/', async (req, res) => {
   catch (err) {
     res.status(500).json(err);
   };
-  // be sure to include its associated Products
 });
 
 // GET Category by Id
@@ -40,6 +41,11 @@ router.get('/:id', async (req, res) => {
 });
 
 // CREATE New Category
+/* req.body should look like this...
+  {
+    "category_name": "Shirts"
+  }
+*/
 router.post('/', async (req, res) => {
   try {
     // create a new category
@@ -52,6 +58,11 @@ router.post('/', async (req, res) => {
 });
 
 //UPDATE Category
+/* req.body should look like this...
+  {
+    "category_name": "Shirts"
+  }
+*/
 router.put('/:id', async (req, res) => {
   try {
     // update a category by its `id` value

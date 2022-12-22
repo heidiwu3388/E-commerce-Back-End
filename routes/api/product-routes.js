@@ -1,9 +1,9 @@
 const router = require('express').Router();
 const { Product, Category, Tag, ProductTag } = require('../../models');
 
-// The `/api/products` endpoint
+// ****** The "/api/products" endpoint ******
 
-// get all products
+// GET All Products
 router.get('/', async (req, res) => {
   try {
     // find all products
@@ -38,16 +38,16 @@ router.get('/:id', async (req, res) => {
 });
 
 // CREATE New Product
+/* req.body should look like this...
+  {
+    product_name: "Basketball",
+    price: 200.00,
+    stock: 3,
+    category_id: 1,
+    tagIds: [1, 2, 3, 4]
+  }
+*/
 router.post('/', (req, res) => {
-  /* req.body should look like this...
-    {
-      product_name: "Basketball",
-      price: 200.00,
-      stock: 3,
-      category_id: 1,
-      tagIds: [1, 2, 3, 4]
-    }
-  */
   Product.create(req.body)
     .then((product) => {
       console.log(product);
@@ -72,6 +72,15 @@ router.post('/', (req, res) => {
 });
 
 // UPDATE Product
+/* req.body should look like this...
+  {
+    product_name: "Basketball",
+    price: 200.00,
+    stock: 3,
+    category_id: 1,
+    tagIds: [1, 2, 3, 4]
+  }
+*/
 router.put('/:id', (req, res) => {
   // update product data
   Product.update(req.body, {
